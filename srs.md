@@ -1,4 +1,4 @@
-# assement-requirement
+# SRS
 
 time-constrained and cost optimized solution
 
@@ -14,34 +14,13 @@ time-constrained and cost optimized solution
 - [ ] input = review + review_metadata 
 - [x] deploy `seqtolang` docker image
 - [ ] read `input` from S3 bucket
-
-------
-
-- Install [docker](https://docs.docker.com/engine/install/ubuntu/)
-- Install `seqtolang` from source
-
-```
-$ git clone https://github.com/hiredscorelabs/seqtolang
-$ cd seqtolang
-$ python setup.py install
-```
-
-- Verify installation in terminal
-
-```
-$ docker build . -t seqtolang
-$ docker run -e SEQTOLANG_TEXT="Good boy in chinese is 好孩子" seqtolang
-```
+- [ ] batch trigger
 
 ## Language Translation
 
 ### TODO:
 - [x] test `de` to `en`
 - [x] test `fr` to `en`
-
-----
-
-- [Install from pip](https://github.com/huggingface/transformers#installation)
 
 ## Sentiment Analysis
 

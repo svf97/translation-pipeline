@@ -85,13 +85,14 @@ input_review = "Hallo liebe Freunde, wie geht es Ihnen heute"
 # print (subprocess.run(['docker', 'run', '-e', 'SEQTOLANG_TEXT=', input_review,'seqtolang'], capture_output=True))
 
 
-from subprocess import run, PIPE
+# from subprocess import run, PIPE
 
-p = run(['sudo','docker', 'run', '-e', 'seqtolang', 'SEQTOLANG_TEXT="'], stdout=PIPE, input=input_review+'"', encoding='ascii')
+# p = run(['sudo','docker', 'run', '-e', 'seqtolang', 'SEQTOLANG_TEXT="'], stdout=PIPE, input=input_review+'"', encoding='ascii')
 
-print (p.returncode)
-# -> 0
-print (p.stdout)
+# print (p.returncode)
+# # -> 0
+# print (p.stdout)
+
 
 # from subprocess import Popen, PIPE, STDOUT
 
@@ -101,3 +102,5 @@ print (p.stdout)
 # grep_stdout = p.communicate(input=input_review.encode()+b'\"')[0]
 # print 
 # print(grep_stdout.decode())
+
+translate(input_review, 'de')
