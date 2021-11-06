@@ -9,7 +9,7 @@ def lang_detect(input_review):
     """
 
     # build_img = 'sudo docker build . -t seqtolang'
-    
+    subprocess.run(['cd', 'seqtolang'])
     subprocess.run(['sudo', 'docker', 'build', '.', '-t', 'seqtolang'])
     lang = subprocess.run(['docker', 'run', '-e', 'SEQTOLANG_TEXT=', input_review,'seqtolang'], capture_output=True)
     # lang = str(tmp.communicate()) 
@@ -21,13 +21,13 @@ def translate (input_review,lang):
     """
 
     lang_detected = {
-        1: 'de',
-        2: 'fr'
+        1: 'deu',
+        2: 'fra'
     }
 
     lang_translate = lang_detected.get(lang, "N/A")
 
-    if lang_translate == 'de':
+    if lang_translate == 'deu':
         de_text = input_review
 
         # Initialize tokenizer
@@ -45,7 +45,7 @@ def translate (input_review,lang):
         translated_text = de_tokenizer.batch_decode(de_translation, skip_special_tokens=True)[0]
 
 
-    elif lang_translate == 'fr':
+    elif lang_translate == 'fra':
         fr_text = input_review
 
         # Initialize tokenizer
@@ -85,7 +85,7 @@ input_review = "Hallo liebe Freunde, wie geht es Ihnen heute"
 # print (subprocess.run(['docker', 'run', '-e', 'SEQTOLANG_TEXT=', input_review,'seqtolang'], capture_output=True))
 
 
-# from subprocess import run, PIPE
+from subprocess import run, PIPE
 
 # p = run(['sudo','docker', 'run', '-e', 'seqtolang', 'SEQTOLANG_TEXT="'], stdout=PIPE, input=input_review+'"', encoding='ascii')
 
@@ -94,13 +94,19 @@ input_review = "Hallo liebe Freunde, wie geht es Ihnen heute"
 # print (p.stdout)
 
 
-# from subprocess import Popen, PIPE, STDOUT
+from subprocess import Popen, PIPE, STDOUT
 
+subprocess.run(['sudo', 'docker', 'build', '.', '-t', 'seqtolang'])
+
+p = Popen(['sudo','docker', 'run', '-e', 'seqtolang', 'SEQTOLANG_TEXT="'], stdout=PIPE, stdin=PIPE, stderr=STDOUT)    
+grep_stdout = p.communicate(input=input_review.encode()+b'\"')[0]
+print 
+print(grep_stdout.decode())
+
+# translate(input_review, 'de')
+
+# subprocess.run(['cd', 'seqtolang'])
 # subprocess.run(['sudo', 'docker', 'build', '.', '-t', 'seqtolang'])
-
-# p = Popen(['sudo','docker', 'run', '-e', 'seqtolang', 'SEQTOLANG_TEXT="'], stdout=PIPE, stdin=PIPE, stderr=STDOUT)    
-# grep_stdout = p.communicate(input=input_review.encode()+b'\"')[0]
-# print 
-# print(grep_stdout.decode())
-
-translate(input_review, 'de')
+# lang = subprocess.run(['docker', 'run', '-e', 'SEQTOLANG_TEXT=', input_review,'seqtolang'], capture_output=True)
+# lang = str(tmp.communicate()) 
+    

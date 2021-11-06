@@ -10,7 +10,8 @@ Data is then stored in AWS database, ?
 
 - Python 3+
 - pip3 
-- git
+- [awscli](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html#cliv2-linux-prereq)
+
 
 - create virtual environment & install requirements
 
@@ -34,19 +35,12 @@ $ python setup.py install
 - Verify installation in terminal
 
 ```
-$ docker build . -t seqtolang
-$ docker run -e SEQTOLANG_TEXT="Good boy in chinese is 好孩子" seqtolang
+$ sudo docker build . -t seqtolang
+$ sudo docker run -e SEQTOLANG_TEXT="Good boy in chinese is 好孩子" seqtolang
 ```
 
 - install [huggingface](https://github.com/huggingface/transformers#installation) transformer and its prerequisites
 
 
-## Workflow Diagram
-
-## How to use
-
-### Language Detection
-
-
-
+[download aws batch helpers](https://github.com/awslabs/aws-batch-helpers/archive/master.zip)
 
