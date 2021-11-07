@@ -92,4 +92,4 @@ The figure below shows the idea architecture for the solution, which is mainly t
 
 ### Python
 
-[Source code and documentation can be found here](README.md)
+[Source code and documentation can be found here](https://github.com/svf97/translation-pipline/blob/main/README.md)
