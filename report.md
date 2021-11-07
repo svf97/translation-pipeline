@@ -13,9 +13,11 @@ The solution presented fulfils the requirement of deploying a Python-based progr
 
 **AWS Batch + Spot Instances**
 
-Reference: https://www.youtube.com/watch?v=Wrg8XvU6qqI
 
-Note: All images below are screenshots from the reference mentioned above. 
+Note: All images below are screenshots from these
+
+- [Reference](https://www.youtube.com/watch?v=Wrg8XvU6qqI)
+- [Reference](https://aws.amazon.com/blogs/compute/creating-a-simple-fetch-and-run-aws-batch-job/#:~:text=AWS%20Batch%20executes%20jobs%20as,script%20and%20run%20your%20job.)
 
 **What is AWS Batch?**
 
@@ -36,22 +38,48 @@ Note: All images below are screenshots from the reference mentioned above.
 
 ![img](https://user-images.githubusercontent.com/60857664/140624022-004137cf-f985-49f6-804c-4d2cac69ec9a.png)
 
-- **spot interruptions:** ECS agent in spot instances trigger a 2 minute notice prior to interruptions if the resources are required, however this is handled by:
-    -  monitoring spot instances for notices, which should drain instance containers and stop scheduling any jobs to that instance
-    - allowing flexibility in terms of subnets and instance types leads to an increased combination of spot instance across resources
+- **spot interruptions:** 
+    - though spot interuptions may seem riskier at first, statistics show less than 5% of spot instance were interrupted in a span of 3 months
+
+    ![img](https://user-images.githubusercontent.com/60857664/140627554-0224d61a-d67b-40d0-94c7-cf300d83bd6b.png)  
+
+    - ECS agent in spot instances trigger a 2 minute notice prior to interruptions if the resources are required, however this is handled by:
+        -  monitoring spot instances for notices, which should drain instance containers and stop scheduling any jobs to that instance
+        - allowing flexibility in terms of subnets and instance types leads to an increased combination of spot instance across resources
+
 
 
 
 **Best Practice Methodology**
 
-- create EC2 template with the following options:
+- Key steps:
+
+    - [ ] Build a Docker image with the fetch & run script
+    - [ ] Create an Amazon ECR repository for the image
+    - [ ] Push the built image to ECR
+    - [ ] Create a simple job script and upload it to S3
+    - [ ] Create an IAM role to be used by jobs to access S3
+    - [ ] Create a job definition that uses the built image
+    - [ ] Submit and run a job that execute the job script from S3
+
+The figure below shows the idea architecture for the solution, which is mainly to have a script that fetches jobs to run from S3, batch processess the data, and have the ready data written to a DB.
+
+
+![img](https://user-images.githubusercontent.com/60857664/140627570-7b90b61a-77fb-4ead-b55b-7150c968189b.png)
+
+----
+
+- create EC2 template and enable spot interruption handling
 
 ![img](https://user-images.githubusercontent.com/60857664/140624043-01af41ad-2728-4610-9640-6cc568f867da.png)
 
+- job retries enabled
+
 - **Handling Spot Interruption:** 
 
-Advanced Settings > User Data >
-`echo "ECS_ENABLE_SPOT_INSTANCE _DRAINING=true" >> /etc/ecs/ecs.config` 
+    Advanced Settings > User Data >
+    `echo "ECS_ENABLE_SPOT_INSTANCE _DRAINING=true" >> /etc/ecs/ecs.config` 
+
 
 - AWS Batch > create 
     - compute environment
