@@ -1,4 +1,4 @@
-# Pipleline for user review translation and sentiment analysis
+# Pipeline for user review translation and sentiment analysis
 
 Assuming user review and its metadata are stored in [AWS S3](), the script translates user review based on detected `{language: [fra, deu]}`, applies sentiment analysis to translated text and calculates score. 
 
