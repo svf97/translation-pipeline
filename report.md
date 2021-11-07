@@ -46,10 +46,12 @@ Note: All images below are screenshots from these
     - ECS agent in spot instances trigger a 2 minute notice prior to interruptions if the resources are required, however this is handled by:
         -  monitoring spot instances for notices, which should drain instance containers and stop scheduling any jobs to that instance
         - allowing flexibility in terms of subnets and instance types leads to an increased combination of spot instance across resources
+        ![Screenshot from 2021-11-06 18-49-55](https://user-images.githubusercontent.com/60857664/140628560-c590a9fe-c50e-4b4f-b466-6cbf0dece2af.png)
 
 
 
 
+- 
 **Best Practice Methodology**
 
 - Key steps:
