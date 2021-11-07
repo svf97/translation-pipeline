@@ -1,8 +1,8 @@
 # Pipeline for user review translation and sentiment analysis
 
-Assuming user review and its metadata are stored in [AWS S3](), the script translates user review based on detected `{language: [fra, deu]}`, applies sentiment analysis to translated text and calculates score. 
+Assuming user review and its metadata are stored in AWS S3, the script translates user review based on detected `{language: [fra, deu]}`, applies sentiment analysis to translated text and calculates score. 
 
-Data is then stored in AWS database, ?
+Data is then stored in AWS database, S3 or DynamoDB.
 
 ## Setting Environment
 
