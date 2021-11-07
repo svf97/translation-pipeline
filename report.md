@@ -2,7 +2,7 @@
 
 ## Software Requirements Specifications
 
-[SRS can be found here](srs.md)
+[SRS can be found here](https://github.com/svf97/translation-pipline/blob/main/srs.md)
 
 ## Solution Presented
 
